@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Review Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#search">Search</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="search">
+        <h2>Search for a Movie</h2>
+        <input type="text" id="searchBox" placeholder="Enter movie name...">
+        <button onclick="searchMovie()">Search</button>
+        <div id="searchResults"></div>
+    </section>
+    <input type="text" id="searchInput" placeholder="Search for a movie..." />
+<div id="movieList"></div>  <!-- This will display the movie results -->
+
+
+    <section id="movies">
+        <center>
+        <br>
+        <h2>Popular Movies</h2>
+        <div id="movieList"></div>
+    </section>
+</center>
+function displayMovies(movies) {
+    movieList.innerHTML = ""; // Clear previous results
+    movies.forEach(movie => {
+        const movieItem = document.createElement("div");
+        movieItem.classList.add("movie-card");
+        movieItem.innerHTML = `
+            <a href="movie.html?id=${movie.id}">
+                <img src="${movie.poster}" alt="${movie.title}" width="100">
+                <h3>${movie.title}</h3>
+                <p>Rating: ${movie.rating}</p>
+            </a>
+        `;
+        movieList.appendChild(movieItem);
+    });
+}
+<input type="text" id="searchBox" placeholder="Search for a movie..." onkeyup="searchMovies()">
+<div id="searchResults"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
