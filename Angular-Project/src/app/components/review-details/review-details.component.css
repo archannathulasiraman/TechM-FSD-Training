@@ -1,0 +1,12 @@
+.list-group-item {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 15px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .list-group-item:hover {
+    background-color: #e9ecef;
+  }
+  

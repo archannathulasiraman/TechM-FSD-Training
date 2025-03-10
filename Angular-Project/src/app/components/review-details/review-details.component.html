@@ -1,0 +1,9 @@
+<h2 class="text-center my-4">Movie Reviews</h2>
+<div class="list-group">
+  <div class="list-group-item list-group-item-action" *ngFor="let movie of movies">
+    <h4 class="mb-3">{{ movie.title }} ({{ movie.releaseYear }})</h4>
+    <div *ngFor="let review of movie.reviews">
+      <p><strong>{{ review.user }}:</strong> {{ review.comment }} ⭐({{ review.rating }})</p>
+    </div>
+  </div>
+</div>
