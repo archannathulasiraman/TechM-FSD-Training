@@ -1,0 +1,27 @@
+<div class="container mt-4">
+    <h2>Movie List</h2>
+  
+    <!-- Filter Dropdown -->
+    <div class="form-group">
+      <label for="filter">Filter by Rating</label>
+      <select class="form-control" [(ngModel)]="selectedCategory">
+        <option value="all">All</option>
+        <option value="hit">Hit (8-10)</option>
+        <option value="average">Average (5-7)</option>
+        <option value="flop">Flop (Below 5)</option>
+      </select>
+    </div>
+  
+    <!-- Movie List -->
+    <div *ngFor="let movie of movies | filterMovies:selectedCategory" class="card mt-3">
+      <img [src]="movie.posterUrl" class="card-img-top" [alt]="movie.title" style="width: 150px; height: auto; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <p class="card-text">{{ movie.description }}</p>
+        <p><strong>Genre:</strong> {{ movie.genre }}</p>
+        <p><strong>Rating:</strong> {{ movie.rating }}</p>
+        <p><strong>Year:</strong> {{ movie.releaseYear }}</p>
+      </div>
+    </div>
+  </div>
+  
