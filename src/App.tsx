@@ -1,52 +1,47 @@
-import { Grid, GridItem, Text } from "@chakra-ui/react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import MovieList from "./components/MovieList";
+import ReviewList from "./components/ReviewList";
+import ReviewForm from "./components/ReviewForm";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-// Import components correctly
-import ButtonCmp from "./components/ButtonCmp";
-import NavBar from "./components/NavBar";
-import GameCard from "./components/GameCard";
-import Footer from "./components/Footer"; 
-import Sidebar from "./components/SideBar"; 
+type Movie = {
+  id: number;
+  title: string;
+};
 
-// Import pages correctly
-import AboutPages from "./pages/AboutPages";
-import ContactPage from "./pages/ContactPage";
-import PrivacyPage from "./pages/PrivacyPage";
-import GameStore from "./pages/GameStore";
+type Review = {
+  movieId: number;
+  text: string;
+};
 
-function App() {
+const App: React.FC = () => {
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]); // ✅ Store reviews
+
+  const handleAddReview = (reviewText: string) => {
+    if (!selectedMovie) return;
+    
+    const newReview: Review = {
+      movieId: selectedMovie.id,
+      text: reviewText,
+    };
+
+    setReviews([...reviews, newReview]); // ✅ Update state with new review
+  };
+
   return (
-    <Router>
-      <Sidebar />
-      <Grid templateAreas={'"nav nav" "side main"'}>
-        <GridItem area={'nav'} bg={'darkblue'}>
-          <NavBar />
-          <Text color='white'>Nav</Text>
-        </GridItem>
-        <GridItem area={'side'} bg={'maroon'}>
-          Side
-        </GridItem>
-        <GridItem area={'main'} bg={'beige'}>
-          Main
-          <GameStore/>
-          <GameCard name={""} />
-        </GridItem>
-      </Grid>
+    <div className="container">
+      <h1>🎬 Movie Review App</h1>
 
-      {/* Router Configuration */}
-      <Routes>
+      <MovieList onSelectMovie={setSelectedMovie} />
 
-        <Route path="/about" element={<AboutPages />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-      </Routes>
+      {/* ✅ Pass the function to ReviewForm */}
+      <ReviewForm selectedMovie={selectedMovie} onAddReview={handleAddReview} />
 
-      <Footer /> {/* Footer at the bottom */}
-    </Router>
+      {/* ✅ Pass reviews to ReviewList */}
+      <ReviewList selectedMovie={selectedMovie} reviews={reviews} />
+    </div>
   );
-}
+};
 
 export default App;
-
-
-//"4e487f238b654bf0b66421ea24335cd9"
